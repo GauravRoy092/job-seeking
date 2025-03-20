@@ -13,13 +13,13 @@ const Hero = () => {
 
   return (
     <div className="relative">
-      {/* Purple Gradient Section with Search */}
+      {/* Purple Gradient Section with Search - Reduced Height */}
       <div className="bg-gradient-to-r from-purple-900 to-indigo-900 text-white 
-                    py-8 sm:py-20 px-2 sm:px-4 text-center 
+                    py-6 sm:py-12 px-2 sm:px-4 text-center 
                     rounded-xl sm:mx-4 mx-2 mt-6 sm:mt-8">
         <div className="max-w-4xl mx-auto">
-          <div className="mb-8 sm:mb-10">
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
+          <div className="mb-4 sm:mb-6">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-3">
               Over <span className="text-purple-200">10,000+</span> jobs available
             </h2>
             <p className="text-sm sm:text-lg text-purple-100 px-2 sm:px-4">
@@ -27,8 +27,8 @@ const Hero = () => {
             </p>
           </div>
 
-          {/* Search Bar Container */}
-          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full mb-12 sm:mb-16">
+          {/* Search Bar Container - Reduced Bottom Margin */}
+          <div className="flex flex-col sm:flex-row gap-3 items-center justify-center w-full mb-6 sm:mb-8">
             <div className="flex items-center bg-white/95 border border-purple-200 
                           rounded-full px-3 py-2 w-full sm:flex-1 shadow-sm backdrop-blur-sm">
               <img
@@ -58,7 +58,7 @@ const Hero = () => {
             </div>
 
             <button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white 
-                             px-4 sm:px-8 py-2 sm:py-3 
+                             px-4 sm:px-8 py-2 sm:py-2.5 
                              rounded-full w-full sm:w-auto 
                              transition-all duration-200 text-sm sm:text-base shadow-md hover:shadow-lg
                              focus:outline-none focus:ring-2 focus:ring-purple-300">
@@ -68,15 +68,15 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Trusted Companies Section with Enhanced Scroll */}
-      <div className="mt-12 sm:mt-16 px-4">
+      {/* Trusted Companies Section with Automatic Scrolling */}
+      <div className="mt-10 sm:mt-12 px-4">
         <p className="text-sm sm:text-base text-gray-600 text-center mb-6">
           Trusted by leading companies worldwide
         </p>
         
-        {/* Enhanced Scrolling Container */}
-        <div className="relative overflow-hidden w-full group">
-          <div className="animate-scroll whitespace-nowrap flex items-center space-x-8 sm:space-x-12 lg:space-x-16 py-4">
+        {/* Auto-Scrolling Container */}
+        <div className="relative overflow-hidden w-full">
+          <div className="logos-slide flex items-center space-x-8 sm:space-x-12 lg:space-x-16 py-4">
             {[...companies, ...companies, ...companies].map((logo, index) => (
               <img 
                 key={index}
@@ -97,30 +97,44 @@ const Hero = () => {
       <style jsx>{`
         @keyframes scroll {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-66.666%); }
+          100% { transform: translateX(-33.33%); }
         }
-        .animate-scroll {
-          animation: scroll 40s linear infinite;
-          display: inline-block;
+        
+        .logos-slide {
+          display: flex;
+          animation: scroll 30s linear infinite;
+          white-space: nowrap;
+          width: fit-content;
         }
+        
+        /* Prevent scrollbar from appearing */
+        .overflow-hidden {
+          overflow: hidden;
+        }
+        
+        /* Adjust animation speed for different screen sizes */
         @media (min-width: 640px) {
-          .animate-scroll {
+          .logos-slide {
             animation-duration: 35s;
           }
         }
+        
         @media (min-width: 1024px) {
-          .animate-scroll {
-            animation-duration: 30s;
+          .logos-slide {
+            animation-duration: 40s;
           }
         }
-        @media (prefers-reduced-motion: reduce) {
-          .animate-scroll {
-            animation: none;
-            overflow-x: auto;
-          }
-        }
-        .group:hover .animate-scroll {
+        
+        /* Pause animation on hover */
+        .logos-slide:hover {
           animation-play-state: paused;
+        }
+        
+        /* Respect user's motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+          .logos-slide {
+            animation-play-state: paused;
+          }
         }
       `}</style>
     </div>
