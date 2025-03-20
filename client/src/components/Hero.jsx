@@ -27,7 +27,7 @@ const Hero = () => {
             </p>
           </div>
 
-          {/* Search Bar Container - Keep this in purple section */}
+          {/* Search Bar Container */}
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full mb-12 sm:mb-16">
             <div className="flex items-center bg-white/95 border border-purple-200 
                           rounded-full px-3 py-2 w-full sm:flex-1 shadow-sm backdrop-blur-sm">
@@ -68,41 +68,59 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Trusted Companies Section - Outside Purple Area */}
+      {/* Trusted Companies Section with Enhanced Scroll */}
       <div className="mt-12 sm:mt-16 px-4">
         <p className="text-sm sm:text-base text-gray-600 text-center mb-6">
           Trusted by leading companies worldwide
         </p>
         
-        {/* Scrolling Logos Container */}
-        <div className="relative overflow-hidden w-full">
-          <div className="animate-scroll whitespace-nowrap flex items-center space-x-12 sm:space-x-16 py-4">
-            {[...companies, ...companies].map((logo, index) => (
+        {/* Enhanced Scrolling Container */}
+        <div className="relative overflow-hidden w-full group">
+          <div className="animate-scroll whitespace-nowrap flex items-center space-x-8 sm:space-x-12 lg:space-x-16 py-4">
+            {[...companies, ...companies, ...companies].map((logo, index) => (
               <img 
                 key={index}
                 src={logo}
                 alt="Company logo"
-                className="h-8 sm:h-10 object-contain opacity-80 hover:opacity-100 transition-opacity inline-block"
+                className="h-8 sm:h-10 lg:h-12 object-contain opacity-80 hover:opacity-100 
+                         transition-opacity inline-block min-w-[100px] sm:min-w-[120px]"
               />
             ))}
           </div>
+          
+          {/* Gradient Fades */}
+          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent"></div>
+          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white to-transparent"></div>
         </div>
       </div>
 
       <style jsx>{`
         @keyframes scroll {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+          100% { transform: translateX(-66.666%); }
         }
         .animate-scroll {
-          animation: scroll 30s linear infinite;
+          animation: scroll 40s linear infinite;
           display: inline-block;
+        }
+        @media (min-width: 640px) {
+          .animate-scroll {
+            animation-duration: 35s;
+          }
+        }
+        @media (min-width: 1024px) {
+          .animate-scroll {
+            animation-duration: 30s;
+          }
         }
         @media (prefers-reduced-motion: reduce) {
           .animate-scroll {
             animation: none;
             overflow-x: auto;
           }
+        }
+        .group:hover .animate-scroll {
+          animation-play-state: paused;
         }
       `}</style>
     </div>
