@@ -3,7 +3,7 @@ import { assets } from '../assets/assets'
 
 const Hero = () => {
   return (
-    <div className='container 2xl:px-20 py-10 px-auto mx-auto'>
+    <div className='container 2xl:px-20 py-10 mx-auto'>
         <div>
             <h2>Over 10,000+ Jobs to Apply</h2>
             <p>Transform Your Tomorrow: Explore Top Job Opportunities and Make Your Next Big Move!
